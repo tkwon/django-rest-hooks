@@ -1,4 +1,6 @@
-Copyright (c) 2012 Zapier LLC.
+## ISC License
+
+Copyright (c) 2016 Zapier Inc.
 
 Permission to use, copy, modify, and/or distribute this software for any
 purpose with or without fee is hereby granted, provided that the above
