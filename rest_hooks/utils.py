@@ -32,7 +32,7 @@ def find_and_fire_hook(event_name, instance, user_override=None):
     Look up Hooks that apply
     """
     from django.contrib.auth.models import User
-    from rest_hooks.models import Hook, HOOK_EVENTS
+    from rest_hooks.models import Hook, HOOK_EVENTS, HOOK_USER_RESOLVER
 
     if not event_name in HOOK_EVENTS.keys():
         raise Exception(
@@ -43,8 +43,13 @@ def find_and_fire_hook(event_name, instance, user_override=None):
 
     # Ignore the user if the user_override is False
     if user_override is not False:
-        if user_override:
-            filters['user'] = user_override
+        resolved_user = None
+        if HOOK_USER_RESOLVER:
+            user_resolver = get_module(HOOK_USER_RESOLVER)
+            resolved_user = user_resolver(instance)
+
+        if user_override or resolved_user:
+            filters['user'] = user_override or resolved_user
         elif hasattr(instance, 'user'):
             filters['user'] = instance.user
         elif isinstance(instance, User):
