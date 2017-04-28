@@ -24,9 +24,6 @@ if HOOK_EVENTS is None:
     raise Exception('You need to define settings.HOOK_EVENTS!')
 
 
-HOOK_USER_RESOLVER = getattr(settings, 'HOOK_USER_RESOLVER', None)
-
-
 if getattr(settings, 'HOOK_THREADING', True):
     from rest_hooks.client import Client
     client = Client()
