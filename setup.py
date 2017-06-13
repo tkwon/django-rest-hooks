@@ -1,4 +1,7 @@
-from distutils.core import setup # setuptools breaks
+try:
+    from setuptools import setup
+except ImportError:
+    from distutils.core import setup  # if setuptools breaks
 
 # Dynamically calculate the version
 version_tuple = __import__('rest_hooks').VERSION
@@ -19,12 +22,16 @@ setup(
             'south_migrations/*.py'
         ]
     },
-    classifiers = ['Development Status :: 3 - Alpha',
-                   'Environment :: Web Environment',
-                   'Framework :: Django',
-                   'Intended Audience :: Developers',
-                   'License :: OSI Approved :: BSD License',
-                   'Operating System :: OS Independent',
-                   'Programming Language :: Python',
-                   'Topic :: Utilities'],
+    classifiers = [
+        'Development Status :: 5 - Production/Stable',
+        'Environment :: Web Environment',
+        'Framework :: Django',
+        'Intended Audience :: Developers',
+        'License :: OSI Approved :: BSD License',
+        'Operating System :: OS Independent',
+        'Programming Language :: Python',
+        'Programming Language :: Python :: 2',
+        'Programming Language :: Python :: 3',
+        'Topic :: Utilities',
+    ],
 )
